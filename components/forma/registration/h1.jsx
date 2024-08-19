@@ -12,7 +12,7 @@ const SH1 = styled.div`
 `;
 
 const H1 = () => {
-  return <SH1><strong>чат окз</strong></SH1>;
+  return <SH1><strong>чат</strong></SH1>;
 };
 
 export default H1;
