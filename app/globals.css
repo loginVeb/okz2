@@ -1,0 +1,33 @@
+
+@font-face {
+  font-family: 'saira';
+  src: url('/fonts/saira.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --background: #ffffff;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.5px rgb(30, 255, 0); /* Пример замены рамкой */
+}

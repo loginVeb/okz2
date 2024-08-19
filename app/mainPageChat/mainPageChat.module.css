@@ -1,0 +1,7 @@
+.mainPageChat {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    min-height: 100vh;
+    background-color: #3cd565;
+  }

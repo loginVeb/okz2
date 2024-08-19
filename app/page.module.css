@@ -1,0 +1,212 @@
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('/fonts/tucsonone.woff2') format('woff2'),
+       url('/fonts/tucsonone.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'saira';
+  src: url('/fonts/saira.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.fon{
+  background: url("/img/fonMain.png");
+ background-size:cover;
+}
+
+.header{
+  grid-area: 1/1/2/25;
+  color: #db3b3b;
+  font-family: 'saira';
+}
+
+.mainPageDiv {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  min-height: 100vh;
+  
+}
+
+.divForm{
+    grid-area: 2/10/5/17;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  border: solid 0.5px rgb(30, 255, 0);
+  box-shadow: 20px 20px 40px rgb(30, 255, 0);
+  background-color: #151414;
+  border-radius:5px;
+}
+
+.forma {
+  grid-area: 1/1/13/13;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(13, 1fr);
+  
+}
+
+.inputText {
+  grid-area: 3/2/5/12;
+  background-color: #2d2c2c;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.inputPassword {
+  grid-area: 6/2/8/12;
+  background-color: #2d2c2c;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+
+}
+
+.button {
+  grid-area: 10/2/12/12;
+  background-color: rgb(30, 255, 0);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'MyFont';
+}
+.button:hover {
+  background-color: rgb(99, 255, 0);
+}
+.button:active {
+  background-color: #ccc;
+}
+
+
+.linkComp{
+  grid-area: 14/4/15/10;
+  order: none;
+  border-radius: 5px;
+  color: #fff;
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+  text-decoration: none;
+  font-family: 'MyFont';
+}
+
+
+@media(1368px <=width <= 1920px) {
+  .divForm {
+    grid-area: 2/11/5/15;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    border: solid 0.5px rgb(30, 255, 0);
+    box-shadow: 20px 20px 40px rgb(30, 255, 0);
+    background-color: #151414;
+    border-radius:5px;
+  }
+
+}
+
+
+@media(1200px <=width <= 1367px) {
+  .divForm {
+    grid-area: 2/10/5/16;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    border: solid 0.5px rgb(30, 255, 0);
+    box-shadow: 20px 20px 40px rgb(30, 255, 0);
+    background-color: #151414;
+    border-radius:5px;
+  }
+
+}
+
+@media(1024px <=width <= 1199px) {
+  .divForm {
+    grid-area: 2/9/5/17;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    border: solid 0.5px rgb(30, 255, 0);
+    box-shadow: 20px 20px 40px rgb(30, 255, 0);
+    background-color: #151414;
+    border-radius:5px;
+  }
+}
+
+@media(800px <=width <= 1023px) {
+  .divForm {
+    grid-area: 2/10/5/17;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    border: solid 0.5px rgb(30, 255, 0);
+    box-shadow: 20px 20px 40px rgb(30, 255, 0);
+    background-color: #151414;
+    border-radius:5px; 
+  }
+}
+
+@media(680px <=width <= 799px) {
+  
+.divForm {
+  grid-area: 2/10/5/17;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    border: solid 0.5px rgb(30, 255, 0);
+    box-shadow: 20px 20px 40px rgb(30, 255, 0);
+    background-color: #151414;
+    border-radius:5px;
+  }
+
+
+}
+
+@media(500px <=width <= 679px) {
+  .divForm {
+    grid-area: 2/9/5/18;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    border: solid 1px rgb(30, 255, 0);
+    border-radius:5px;
+  }
+}
+
+@media(420px <=width <= 499px) {
+  .divForm {
+    grid-area: 2/8/5/19;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    border: solid 1px rgb(30, 255, 0);
+    border-radius:5px;
+  }
+}
+  
+@media(280px <=width <= 419px) {
+  .divForm {
+    grid-area: 2/7/5/20;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(13, 1fr);
+    border: solid 1px rgb(30, 255, 0);
+    border-radius:5px;
+  }
+
+  .button {
+    font-size: 12px;
+  }
+  
+  .linkComp{
+    font-size: 12px;;
+  }
+
+}
