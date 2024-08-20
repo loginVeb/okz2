@@ -1,6 +1,7 @@
 "use client";
 import InputText from '@/components/forma/login/inputText';
 import InputPassword from '@/components/forma/login/inputPassword';
+import ErrorNamePass from '@/components/forma/login/errorNamePass';
 import Button from "@/components/forma/login/button";
 import LinkComp from "@/components/forma/login/link";
 import ContextForm from '../contextForm';
@@ -9,13 +10,12 @@ import { useState, useEffect } from 'react';
 const Forma = (props) => {
   const { styles } = props;
 
-
   const [inputValues, setInputValues] = useState('');
   const [inputPassword, setInputPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-
     console.log(inputValues);
   }, [inputValues]);
 
@@ -25,25 +25,33 @@ const Forma = (props) => {
 
   const handleChangeInput = (event) => {
     let inputValue = event.target.value;
-    // Проверяем, содержит ли значение пробелы
+
     if (/[\s]/.test(inputValue)) {
-        console.log("Пробелы не допускаются");
-        return; // Прекратите выполнение функции, если найден пробел
+      console.log("Пробелы не допускаются");
+      return;
+    }
+
+    if (inputValue.length > 20) {
+      console.log("Максимальное количество символов - 10");
+      return;
     }
     setInputValues(inputValue);
-    console.log(inputValues);
-};
+  };
 
-const handleChangePassword = (event) => {
+  const handleChangePassword = (event) => {
     let inputPassword = event.target.value;
-    // Проверяем, содержит ли значение пробелы
+
     if (/[\s]/.test(inputPassword)) {
-        console.log("Пробелы не допускаются");
-        return; // Прекратите выполнение функции, если найден пробел
+      console.log("Пробелы не допускаются");
+      return;
+    }
+
+    if (inputPassword.length > 20) {
+      console.log("Максимальное количество символов - 10");
+      return;
     }
     setInputPassword(inputPassword);
-    console.log(inputPassword);
-};
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,33 +66,40 @@ const handleChangePassword = (event) => {
           password: inputPassword,
         }),
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      console.log(data);
-
-      if (data.success) {
-        // Обработка успешной аутентификации
-        console.log('Аутентификация прошла успешно');
-        window.location.href = '/mainPageChat';
+     
+      console.log('Status:', response.status);
+  
+      if (response.status === 200) { // Проверяем статус ответа на 200
+        const data = await response.json();
+        console.log("Server response:", data);
+        
+        if (data.success) {
+          console.log('Аутентификация прошла успешно');
+          window.location.href = '/mainPageChat';
+          setShowError(false); 
+        } else {
+          console.log('Ошибка аутентификации');
+          setShowError(true); 
+        }
+      } else if (response.status === 400) { // Обработка статуса 400
+        console.error("Bad request during authentication:", response.statusText);
+        setShowError(true); 
       } else {
-        // Обработка ошибки аутентификации
-        console.log('Ошибка аутентификации');
+        // Обработка других статусов ответа
+        console.error("Unexpected status code:", response.status);
+        setIsSubmitting(false);
       }
     } catch (error) {
       console.error("Error during authentication:", error);
-    } finally {
-      setIsSubmitting(false); // Сбросить в false после завершения запроса
+      setIsSubmitting(false);
     }
+  
+    console.log("Current showError value:", showError);
   };
-
-
   return (
     <ContextForm.Provider value={{ handleChangeInput, handleChangePassword, inputValues, inputPassword }}>
-      <form className={styles.forma} onSubmit={handleSubmit}>
+      <form className={styles.forma} onSubmit={handleSubmit} method="post">
+        {showError && <ErrorNamePass styles={styles} errortext={'нет таких данных'} />}
         <InputText styles={styles} />
         <InputPassword styles={styles} />
         <Button styles={styles} disabled={isSubmitting}>войти</Button>

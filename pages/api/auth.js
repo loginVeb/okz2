@@ -23,10 +23,10 @@ export default async function handleAuth(req, res) {
     if (user) {
       // Пользователь найден, отправляем ответ о успешной аутентификации
       res.status(200).json({ success: true, message: 'Пользователь найден' });
-      res.redirect('/mainPageChat');
+      //res.redirect('/mainPageChat');
     } else {
       // Пользователь не найден, отправляем ответ об ошибке
-      res.status(404).json({ success: false, message: 'Пользователь не найден' });
+      res.status(400).json({ success: false, message: 'Пользователь не найден' });
     }
   } else {
     // Метод запроса не поддерживается

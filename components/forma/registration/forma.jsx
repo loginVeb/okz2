@@ -123,7 +123,7 @@ const handleChangePassword2 = (event) => {
   return (
     <ContextForm.Provider value={{ handleChangeInput, handleChangePassword,handleChangePassword2, inputValues, inputPassword, inputPassword2}}>
       
-      <form className={styles.forma}
+      <form className={styles.forma}  method="post"
       onSubmit={handleSubmit}>
         <InputText styles={styles} />
         <InputPassword styles={styles} />
