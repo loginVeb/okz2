@@ -8,11 +8,13 @@ import DivForm from '@/components/forma/login/divForm';
 
 export default function Main() {
   return (
+    
     <main className={styles.mainPageDiv}>
       <Header styles={styles} />
       <H1 />
       <DivForm styles={styles} />
     </main>
+   
   )
 }
 // contr+shift+p settings настройки

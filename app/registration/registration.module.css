@@ -77,6 +77,13 @@
   font-size: 60%;
   text-align: center;
 }
+.errorName{
+  grid-area: 1/2/2/12;
+  color: rgb(255, 0, 0);
+  font-family: 'MyFont';
+  font-size: 60%;
+  text-align: center;
+}
 
 .button {
   grid-area: 11/2/13/12;

@@ -6,9 +6,16 @@ import Button from "@/components/forma/login/button";
 import LinkComp from "@/components/forma/login/link";
 import ContextForm from '../contextForm';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../../../app/authContext'; 
+
+
+
 
 const Forma = (props) => {
   const { styles } = props;
+  const { setIsAuthenticated, isAuthenticated } = useAuth();
+  const router = useRouter();
 
   const [inputValues, setInputValues] = useState('');
   const [inputPassword, setInputPassword] = useState('');
@@ -36,6 +43,10 @@ const Forma = (props) => {
       return;
     }
     setInputValues(inputValue);
+    // Убираем сообщение об ошибке при изменении значения поля ввода имени, если оно было показано ранее
+    if (showError) {
+      setShowError(false);
+    }
   };
 
   const handleChangePassword = (event) => {
@@ -51,12 +62,16 @@ const Forma = (props) => {
       return;
     }
     setInputPassword(inputPassword);
+    // Аналогично убираем сообщение об ошибке при изменении пароля, если оно было показано ранее
+    if (showError) {
+      setShowError(false);
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/auth', {
+      const response = await fetch('/api/login/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,26 +81,28 @@ const Forma = (props) => {
           password: inputPassword,
         }),
       });
-     
+
       console.log('Status:', response.status);
-  
-      if (response.status === 200) { // Проверяем статус ответа на 200
+
+      if (response.status === 200) {
         const data = await response.json();
         console.log("Server response:", data);
-        
+
         if (data.success) {
           console.log('Аутентификация прошла успешно');
-          window.location.href = '/mainPageChat';
-          setShowError(false); 
+          localStorage.setItem('authToken', 'yourAuthToken'); 
+          setIsAuthenticated(true);
+          console.log(isAuthenticated)
+          router.push('/mainPageChat');
+          setShowError(false);
         } else {
           console.log('Ошибка аутентификации');
-          setShowError(true); 
+          setShowError(true);
         }
-      } else if (response.status === 400) { // Обработка статуса 400
+      } else if (response.status === 400) {
         console.error("Bad request during authentication:", response.statusText);
-        setShowError(true); 
+        setShowError(true);
       } else {
-        // Обработка других статусов ответа
         console.error("Unexpected status code:", response.status);
         setIsSubmitting(false);
       }
@@ -93,9 +110,10 @@ const Forma = (props) => {
       console.error("Error during authentication:", error);
       setIsSubmitting(false);
     }
-  
+
     console.log("Current showError value:", showError);
   };
+
   return (
     <ContextForm.Provider value={{ handleChangeInput, handleChangePassword, inputValues, inputPassword }}>
       <form className={styles.forma} onSubmit={handleSubmit} method="post">
